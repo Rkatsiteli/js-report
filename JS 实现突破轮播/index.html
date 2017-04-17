@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta name="viewport" content="width=device-width, target-densitydpi=high-dpi, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			
+			.imgbox {
+				width: 320px;
+				height: 500px;
+				overflow: hidden;
+				margin: 0 auto;
+			}
+			
+			.imgbox ul {
+				float: left;
+				width: 9999px;
+				height: 150px;
+			}
+			
+			.imgbox ul li {
+				float: left;
+				width: 320px;
+				height: 500px;
+				text-align: center;
+			}
+			
+			.imgbox ul li img {
+				width: 320px;
+				height: 500px;
+			}
+			
+			.page ol {
+				position: absolute;
+				z-index: 2;
+				top: 92%;
+			}
+			
+			.page ol li {
+				position: relative;
+				display: inline-block;
+				width: 80px;
+				height: 30px;
+				background-color: #666;
+				margin: 0px 10px;
+				float: left;
+				color: #fff;
+				text-decoration: none;
+				text-align: center;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+			
+			.page ol li.active {
+				background: red;
+			}
+		</style>
+		<script src="zepto.min.js"></script>
+		<script src="lunbo.js"></script>
+	</head>
+
+	<body>
+		<div class="imgbox">
+			<ul>
+				<li>
+					<img src="http://y2.ifengimg.com/df84c07b46e03f8e/2014/0512/rdn_53708f3d8533e.jpg"></img>
+				</li>
+				<li>
+					<img src="http://y2.ifengimg.com/df84c07b46e03f8e/2014/0512/rdn_53708f23aad06.jpg"></img>
+				</li>
+			</ul>
+		</div>
+		<div class="page">
+			<ol>
+				<li class="active">热门</li>
+				<li>你猜</li>
+			</ol>
+		</div>
+		<script>
+				/*
+				    注意：$.mggScrollImg返回的scrollImg对象上有
+				            next，prev，go三个方法，可以实现外部对滚动索引的控制。
+				    如：scrollImg.next();//会切换到下一张图片
+				        scrollImg.go(0);//会切换到第一张图片
+				*/
+					
+			var scrollImg = $.mggScrollImg('.imgbox ul', {
+				loop: true, //循环切换
+				auto: true, //自动切换
+				callback: function(ind) { //这里传过来的是索引值
+					$('.page ol li').eq(ind).addClass('active').siblings().removeClass('active');
+				}
+			});
+			
+			$(".page ol li").on("click",function(){
+				scrollImg.go($(this).index());
+			});
+			
+				
+		</script>
+	</body>
+
+</html>
