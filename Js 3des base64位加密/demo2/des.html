@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	</head>
+
+	<body>
+		<table>
+			<tr>
+				<td align="left">字符串：</td>
+				<td><span id="str">张三</span></td>
+			</tr>
+			<tr>
+				<td>加密key：</td>
+				<td id="key">12345678</td>
+			</tr>
+			<tr>
+				<td align="left">加密结果：</td>
+				<td align="left"><label id="enStr"></label></td>
+			</tr>
+			<tr>
+				<td align="left">解密结果： </td>
+				<td align="left"><label id="dnStr"></label></td>
+			</tr>
+			<table>
+	</body>
+	<script src="des.js"></script>
+	<script>
+		window.onload = function() {
+			var key = "12345678",
+				str = "张三",
+				enStr = document.getElementById("enStr"),
+				dnStr = document.getElementById("dnStr");
+
+			str = base64encode(des(key, utf16to8(str), 1, 1, hexToString("1234567890ABCDEF"), 1)); //加密;
+			enStr.innerHTML = str; //加密
+
+			dnStr.innerHTML = Handle(utf8to16(des(key, base64decode(String(str)), 0, 1, hexToString("1234567890ABCDEF"), 0))); //解密
+
+		}
+		
+		function Handle(data) {
+			data = String(data);
+			var datasNum = data.substring(data.length, data.length - 1);
+			data = data.split(datasNum)[0];
+			if(data && data.length > 0) {
+				return data;
+			}
+		}
+	</script>
+
+</html>
