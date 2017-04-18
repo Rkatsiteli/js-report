@@ -1,0 +1,84 @@
+.yo-scroll {
+    font-size: 24px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+    z-index: 100;
+    height: auto;
+    -webkit-overflow-scrolling: touch;
+    .inner {
+        position: absolute;
+        top: -5rem;
+        width: 100%;
+        height: auto;
+        transition-duration: 300ms;
+        .pull-refresh {
+            position: relative;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 5rem;
+            display: flex;
+            display: -webkit-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .load-more {
+            height: 5rem;
+            line-height: 5rem;
+            display: flex;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            display: none;
+        }
+        .nullData {//暂无更多数据样式
+            font-size: 26px;
+            color: #999999;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+        }
+        .down-tip,
+        .refresh-tip,
+        .up-tip {
+            display: none;
+        }
+        .up-tip:before,
+        .refresh-tip:before {
+            content: '';
+            display: inline-block;
+            width: 160px;
+            height: 70px;
+            background-size: 70% !important;
+            position: absolute;
+            top: 0;
+            left: 20%;
+        }
+        .up-tip:before {
+            background: url(../img/down-logo.png) no-repeat center;
+        }
+        .refresh-tip:before {
+            background: url(../img/refresh-logo.gif) no-repeat center;
+        }
+    }
+}
+
+.yo-scroll.touch .inner {
+    transition-duration: 0;
+}
+
+.yo-scroll.down .down-tip {
+    display: block;
+}
+
+.yo-scroll.up .up-tip {
+    display: block;
+}
+
+.yo-scroll.refresh .refresh-tip {
+    display: block;
+}
