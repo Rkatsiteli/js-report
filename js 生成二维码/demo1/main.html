@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title></title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style>
+			#qrcode {
+				text-align: center;
+				display: table-cell;
+				margin: 0 auto 20%;
+				text-align: center;
+				vertical-align:middle;
+				position: relative;
+			}
+			#qrcode img{
+				border: 1px solid red;
+			}
+		</style>
+		<script src="qrcode-main.js"></script>
+	</head>
+
+	<body>
+		<div id="qrcode" down></div>
+
+		<input type="text" id="getval" />
+		<button id="send">点击更换二维码</button>
+		<script>
+			window.onload = function() {
+				var qrcode = new QRCode(document.getElementById("qrcode"), {
+					width: 100, //设置宽高
+					height: 100,
+					colorDark:"#009dff",
+					colorLight:"#ffffff",
+					src:"logo.png"
+				});
+				
+				
+				qrcode.makeCode("https://www.baidu.com/");//默认为百度的二维码
+				
+				
+				document.getElementById("send").onclick = function() {
+					qrcode.makeCode(document.getElementById("getval").value);
+				}
+
+				
+			}
+		</script>
+	</body>
+
+</html>
