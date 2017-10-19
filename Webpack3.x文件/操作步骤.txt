@@ -1,0 +1,19 @@
+
+操作执行：
+
+1、将本文件夹下的文件拷贝到你的工作目录
+
+2、cmd 切换到你的工作目录
+
+3、2种方案执行任何一种都可以。
+
+（1）执行 npm install 或者 cnpm install 即可！（mac 前面加sudo执行，因为package.json其中部分文件必须要管理员权限下才能写入）
+
+（2）npm i --save-dev babel-core babel-loader babel-plugin-transform-runtime babel-polyfill babel-preset-es2015 babel-preset-stage-0 babel-runtime clean-webpack-plugin css-loader enhanced-resolve extract-text-webpack-plugin file-loader html-webpack-plugin ip less less-loader path style-loader text-loader url-loader vue vue-loader vue-router vuex watchpack webpack webpack-dev-server xml-loader 
+
+4、webpack 的一些依赖文件基本上就搞定了，接下来就可以配置你的入口文件了
+
+具体的信息，可访问：http://blog.csdn.net/qq_16559905/article/details/78277642
+
+
+
