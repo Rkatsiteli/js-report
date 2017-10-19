@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>子页面</title>
+	</head>
+
+	<body>
+		<button onclick="aaa()">更改父页面的文件</button>
+	</body>
+	<script>
+		function aaa() {
+			/**
+			 * //更改父页面的元素
+			 * window.opener 返回的是创建当前窗口的那个父窗口的引用，比如点击了a.htm上的一个链接而打开了b.htm
+			 */
+			window.opener.document.getElementById('textfield').value = '123123123';
+		}
+	</script>
+
+</html>
