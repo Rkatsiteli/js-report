@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>A页面</title>
+	</head>
+	<body>
+		A页面，载入B页面的内容<br />
+		<div id="app"></div>
+	</body>
+	<script src="//unpkg.com/jquery@2.1.4/dist/jquery.min.js"></script>
+	<script>
+		$("#app").load("b.html");
+	</script>
+</html>
