@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>H5语音播报功能</title>
+		<style>
+			article {margin: 0 auto;max-width: 800px;text-align: center;}
+			textarea {max-width: 600px;width:100%;text-align: left;}
+			button{border-radius: 3px;border: 1px solid #dddddd;height: 30px;width: 80px;cursor: pointer;}
+		</style>
+	</head>
+
+	<body>
+		<article>
+			<h3 align="center">语音播报功能：</h3>
+			<p>
+				<textarea rows="15" class="_play">搜狗[1]  是搜狐公司的旗下子公司，于2004年8月3日推出，目的是增强搜狐网的搜索技能，主要经营搜狐公司的搜索业务。在搜索业务的同时，也推出搜狗输入法、搜狗高速浏览器。</textarea>
+			</p>
+			<p>
+				<label>选择播报语言：</label>
+				<select id="voiceSelect" onchange="play()"></select>
+			</p>
+			<button class="_search" onclick="play()">开始</button>
+			<button onclick="resume()">继续</button>
+			<button onclick="pause()">暂停</button>
+			<button onclick="cancel()">清除队列</button>
+		</article>
+	</body>
+	<script>
+		if(!('speechSynthesis' in window)) {
+			throw alert("对不起，您的浏览器不支持")
+		}
+
+		var _play = document.querySelector("._play"),
+			to_speak = window.speechSynthesis,
+			dataName, voiceSelect = document.querySelector("#voiceSelect"),
+			voices = [];
+
+		function play() {
+			cancel();
+			to_speak = new SpeechSynthesisUtterance(_play.value);
+
+			//to_speak.rate = 1.4;// 设置播放语速，范围：0.1 - 10之间
+
+			var selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
+			for(i = 0; i < voices.length; i++) {
+				if(voices[i].name === selectedOption) {
+					to_speak.voice = voices[i];
+				}
+			}
+
+			window.speechSynthesis.speak(to_speak);
+
+		}
+
+		//暂停
+		function pause() {
+			window.speechSynthesis.pause();
+		}
+		//继续播放
+		function resume() {
+			window.speechSynthesis.resume(); //继续
+		}
+		//清除所有语音播报创建的队列
+		function cancel() {
+			window.speechSynthesis.cancel();
+		}
+		//创建选择语言的select标签
+		function populateVoiceList() {
+			voices = speechSynthesis.getVoices();
+			for(i = 0; i < voices.length; i++) {
+				var option = document.createElement('option');
+				option.textContent = voices[i].name + ' (' + voices[i].lang + ')';
+
+				if(voices[i].default) {
+					option.textContent += ' - default - ';
+				}
+				option.setAttribute('data-lang', voices[i].lang);
+				option.setAttribute('data-name', voices[i].name);
+				voiceSelect.appendChild(option);
+			}
+		}
+
+		setTimeout(function() {
+			populateVoiceList();
+		}, 0)
+	</script>
+
+</html>
